@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,7 +15,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import "./city-selector.component.css";
 
-const marketPlace = ["Київ", "Луцьк", "Харків", "Івано-Франківськ"];
+let marketPlace = [];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -31,16 +32,16 @@ function SimpleDialog(props) {
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>Оберіть місто</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {marketPlace.map((market) => (
+        {marketPlace.slice(1).map((market) => (
           <ListItem
             button
-            onClick={() => handleListItemClick(market)}
-            key={market}
+            onClick={() => handleListItemClick(market.name)}
+            key={market.key}
           >
             <ListItemAvatar>
               <LocationOnIcon sx={{ color: blue[600] }}></LocationOnIcon>
             </ListItemAvatar>
-            <ListItemText primary={market} />
+            <ListItemText primary={market.name} />
           </ListItem>
         ))}
 
@@ -65,9 +66,10 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired
 };
 
-export default function CitySelectorComponent() {
+const CitySelectorComponent = (props) => {
+  marketPlace = props.appData.appReducer.citiesArrayData;
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(marketPlace[1]);
+  const [selectedValue, setSelectedValue] = React.useState(marketPlace[1].name);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -76,6 +78,10 @@ export default function CitySelectorComponent() {
   const handleClose = (value) => {
     setOpen(false);
     setSelectedValue(value);
+    
+    marketPlace.map((el, key) => {
+      if (el.name == value) console.log(marketPlace[key].key);
+    })
   };
 
   return (
@@ -101,3 +107,15 @@ export default function CitySelectorComponent() {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    appData: { ...state }
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CitySelectorComponent);

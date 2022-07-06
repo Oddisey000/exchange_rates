@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -43,7 +44,7 @@ const rows = [
   createData("Польський злотий ", 7.54, 7.82, "(PLN)")
 ];
 
-export default function DataTable() {
+const DataTable = (props) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="customized table">
@@ -74,3 +75,15 @@ export default function DataTable() {
     </TableContainer>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    appData: { ...state }
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataTable);
