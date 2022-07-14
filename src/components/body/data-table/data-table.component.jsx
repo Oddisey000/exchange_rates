@@ -46,35 +46,37 @@ const rows = [
 
 const DataTable = (props) => {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Грошова одиниця</StyledTableCell>
-            <StyledTableCell align="center">Купівля</StyledTableCell>
-            <StyledTableCell align="center">Продаж</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.currencyName}>
-              <StyledTableCell component="th" scope="row">
-                <div className="currency-name">{row.currencyName}</div>
-                <p style={{ fontWeight: "bold" }}>&nbsp;{row.nameShort}</p>
-              </StyledTableCell>
-              <StyledTableCell style={{ fontSize: "20px" }} align="center">
-                {row.buyPrice}
-              </StyledTableCell>
-              <StyledTableCell style={{ fontSize: "20px" }} align="center">
-                {row.sellPrice}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div style={{ height: "100%" }}>
+      <TableContainer component={Paper}>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">Грошова одиниця</StyledTableCell>
+              <StyledTableCell align="center">Купівля</StyledTableCell>
+              <StyledTableCell align="center">Продаж</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <StyledTableRow key={row.currencyName}>
+                <StyledTableCell align="left" component="th" scope="row">
+                  <div className="currency-name">{row.currencyName}</div>
+                  <p style={{ fontWeight: "bold" }}>&nbsp;{row.nameShort}</p>
+                </StyledTableCell>
+                <StyledTableCell style={{ fontSize: "20px" }} align="center">
+                  {row.buyPrice}
+                </StyledTableCell>
+                <StyledTableCell style={{ fontSize: "20px" }} align="center">
+                  {row.sellPrice}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

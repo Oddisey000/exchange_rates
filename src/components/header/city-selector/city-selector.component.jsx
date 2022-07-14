@@ -78,10 +78,11 @@ const CitySelectorComponent = (props) => {
   const handleClose = (value) => {
     setOpen(false);
     setSelectedValue(value);
-    
+
     marketPlace.map((el, key) => {
-      if (el.name == value) console.log(marketPlace[key].key);
-    })
+      if (el.name === value) console.log(marketPlace[key].key)
+      return el
+    });
   };
 
   return (
@@ -94,8 +95,11 @@ const CitySelectorComponent = (props) => {
           style={{ fontSize: "medium" }}
         >
           <span id="header-text">Курс валют</span>
+          <br />
           <Link href="#" underline="none" onClick={handleClickOpen}>
-            &nbsp; {selectedValue} <KeyboardDoubleArrowDownIcon />
+            <KeyboardDoubleArrowDownIcon style={{ marginBottom: "-5px" }} />
+            &nbsp; {selectedValue}{" "}
+            <KeyboardDoubleArrowDownIcon style={{ marginBottom: "-5px" }} />
           </Link>
         </Typography>
         <SimpleDialog
@@ -106,7 +110,7 @@ const CitySelectorComponent = (props) => {
       </div>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -118,4 +122,7 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CitySelectorComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CitySelectorComponent);

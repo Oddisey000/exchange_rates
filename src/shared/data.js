@@ -76,7 +76,7 @@ export const dataArr = [
     key: "kovel"
   },
   {
-    name: "Володимир-Волинський",
+    name: "Володимир",
     key: "volodymyr-volynskyi"
   },
   {

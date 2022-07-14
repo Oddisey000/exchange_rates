@@ -6,6 +6,7 @@
 #header-text {
   text-shadow: 1px 1px 2px #000000;
   color: darkturquoise;
+  font-size: larger;
 }
 .app-title {
   justify-content: center;
